@@ -1,7 +1,5 @@
 import 'dart:ui';
-
 import 'package:chat/controllers/notes/note_form/note_form_bloc.dart';
-import 'package:chat/domain/notes/todo_item.dart';
 import 'package:chat/domain/notes/value_objects.dart';
 import 'package:chat/view/notes/note_form/todo_item_view_classes.dart';
 import 'package:flutter/material.dart';

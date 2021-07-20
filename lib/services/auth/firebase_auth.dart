@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:chat/domain/auth/value_objects.dart';
 import 'package:chat/domain/auth/auth_failure.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
-import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:chat/domain/auth/auth_interface.dart';
 import 'package:injectable/injectable.dart';

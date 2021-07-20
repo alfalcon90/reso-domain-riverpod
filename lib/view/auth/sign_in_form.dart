@@ -1,8 +1,5 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:chat/controllers/auth/auth_bloc.dart';
 import 'package:chat/controllers/auth/sign_in_form/sign_in_form_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:chat/view/routes/router.gr.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInForm extends StatelessWidget {
@@ -114,24 +111,22 @@ class SignInForm extends StatelessWidget {
     }, listener: (context, state) {
       state.authFailureOrSuccessOption.fold(
           () {},
-          (either) => either.fold((failure) {
-                final snackBar = SnackBar(
-                  content: Text(
-                    failure.map(
-                        cancelledByUser: (_) => 'Cancelled',
-                        serverError: (_) => 'Server error',
-                        emailAlreadyInUse: (_) => 'Email already in use',
-                        invalidCredentials: (_) =>
-                            'Invalid email and password combination'),
-                  ),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }, (_) {
-                AutoRouter.of(context).replace(NotesOverviewRoute());
-                context
-                    .read<AuthBloc>()
-                    .add(const AuthEvent.onAuthCheckRequested());
-              }));
+          (either) => either.fold(
+                (failure) {
+                  final snackBar = SnackBar(
+                    content: Text(
+                      failure.map(
+                          cancelledByUser: (_) => 'Cancelled',
+                          serverError: (_) => 'Server error',
+                          emailAlreadyInUse: (_) => 'Email already in use',
+                          invalidCredentials: (_) =>
+                              'Invalid email and password combination'),
+                    ),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
+                (_) {},
+              ));
     });
   }
 }
