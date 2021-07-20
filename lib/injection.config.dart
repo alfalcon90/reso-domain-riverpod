@@ -10,16 +10,16 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i5;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/auth/auth_bloc.dart' as _i14;
-import 'application/auth/sign_in_form/sign_in_form_bloc.dart' as _i13;
-import 'application/notes/note_actor/note_actor_bloc.dart' as _i10;
-import 'application/notes/note_form/note_form_bloc.dart' as _i11;
-import 'application/notes/note_watcher/note_watcher_bloc.dart' as _i12;
+import 'controllers/auth/auth_bloc.dart' as _i14;
+import 'controllers/auth/sign_in_form/sign_in_form_bloc.dart' as _i13;
+import 'controllers/notes/note_actor/note_actor_bloc.dart' as _i10;
+import 'controllers/notes/note_form/note_form_bloc.dart' as _i11;
+import 'controllers/notes/note_watcher/note_watcher_bloc.dart' as _i12;
 import 'domain/auth/auth_interface.dart' as _i6;
 import 'domain/notes/note_interface.dart' as _i8;
-import 'infrastructure/auth/firebase_auth.dart' as _i7;
-import 'infrastructure/core/firebase_injectable_module.dart' as _i15;
-import 'infrastructure/notes/note_repository.dart'
+import 'services/auth/firebase_auth.dart' as _i7;
+import 'services/core/firebase_injectable_module.dart' as _i15;
+import 'services/notes/note_repository.dart'
     as _i9; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
