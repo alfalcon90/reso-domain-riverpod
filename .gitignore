@@ -75,3 +75,4 @@ google-services.json
 # Generated
 *.g.dart 
 *.freezed.dart
+*.gr.dart

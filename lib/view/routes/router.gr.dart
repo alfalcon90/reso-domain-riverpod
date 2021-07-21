@@ -7,9 +7,10 @@
 import 'package:auto_route/auto_route.dart' as _i1;
 import 'package:flutter/material.dart' as _i2;
 
-import '../../domain/notes/note.dart' as _i6;
-import '../auth/auth_check.dart' as _i3;
-import '../notes/note_form/note_form_page.dart' as _i5;
+import '../../domain/notes/note.dart' as _i7;
+import '../auth/sign_in_page.dart' as _i5;
+import '../core/splash_page.dart' as _i3;
+import '../notes/note_form/note_form_page.dart' as _i6;
 import '../notes/notes_overview/notes_overview_page.dart' as _i4;
 
 class AppRouter extends _i1.RootStackRouter {
@@ -18,37 +19,43 @@ class AppRouter extends _i1.RootStackRouter {
 
   @override
   final Map<String, _i1.PageFactory> pagesMap = {
-    AuthCheck.name: (routeData) => _i1.MaterialPageX<dynamic>(
+    SplashRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
-          return const _i3.AuthCheck();
+          return const _i3.SplashPage();
         }),
     NotesOverviewRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (_) {
           return const _i4.NotesOverviewPage();
         }),
+    SignInRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
+        routeData: routeData,
+        builder: (_) {
+          return const _i5.SignInPage();
+        }),
     NoteFormRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
         builder: (data) {
           final args = data.argsAs<NoteFormRouteArgs>();
-          return _i5.NoteFormPage(key: args.key, editedNote: args.editedNote);
+          return _i6.NoteFormPage(key: args.key, editedNote: args.editedNote);
         },
         fullscreenDialog: true)
   };
 
   @override
   List<_i1.RouteConfig> get routes => [
-        _i1.RouteConfig(AuthCheck.name, path: '/'),
+        _i1.RouteConfig(SplashRoute.name, path: '/'),
         _i1.RouteConfig(NotesOverviewRoute.name, path: '/notes-overview-page'),
+        _i1.RouteConfig(SignInRoute.name, path: '/sign-in-page'),
         _i1.RouteConfig(NoteFormRoute.name, path: '/note-form-page')
       ];
 }
 
-class AuthCheck extends _i1.PageRouteInfo {
-  const AuthCheck() : super(name, path: '/');
+class SplashRoute extends _i1.PageRouteInfo {
+  const SplashRoute() : super(name, path: '/');
 
-  static const String name = 'AuthCheck';
+  static const String name = 'SplashRoute';
 }
 
 class NotesOverviewRoute extends _i1.PageRouteInfo {
@@ -57,8 +64,14 @@ class NotesOverviewRoute extends _i1.PageRouteInfo {
   static const String name = 'NotesOverviewRoute';
 }
 
+class SignInRoute extends _i1.PageRouteInfo {
+  const SignInRoute() : super(name, path: '/sign-in-page');
+
+  static const String name = 'SignInRoute';
+}
+
 class NoteFormRoute extends _i1.PageRouteInfo<NoteFormRouteArgs> {
-  NoteFormRoute({_i2.Key? key, required _i6.Note? editedNote})
+  NoteFormRoute({_i2.Key? key, required _i7.Note? editedNote})
       : super(name,
             path: '/note-form-page',
             args: NoteFormRouteArgs(key: key, editedNote: editedNote));
@@ -71,5 +84,5 @@ class NoteFormRouteArgs {
 
   final _i2.Key? key;
 
-  final _i6.Note? editedNote;
+  final _i7.Note? editedNote;
 }

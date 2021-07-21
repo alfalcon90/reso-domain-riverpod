@@ -51,7 +51,7 @@ class NotesOverviewPage extends ConsumerWidget {
             leading: IconButton(
                 icon: Icon(Icons.exit_to_app),
                 onPressed: () {
-                  ref.read(authControllerProvider.notifier).signOut();
+                  ref.read(authControllerProvider.notifier).onSignOutPressed();
                 }),
             actions: [UncompletedSwitch()],
           ),

@@ -6,10 +6,10 @@ class AuthController extends StateNotifier<AuthState> {
   final IAuthService _authService;
 
   AuthController(this._authService) : super(const AuthState.initial()) {
-    checkAuth();
+    onAuthCheckRequested();
   }
 
-  void checkAuth() async {
+  Future<void> onAuthCheckRequested() async {
     final userOption = await _authService.getSignedInUser();
     state = userOption.fold(
       () => const AuthState.unauthenticated(),
@@ -17,7 +17,7 @@ class AuthController extends StateNotifier<AuthState> {
     );
   }
 
-  void signOut() async {
+  void onSignOutPressed() async {
     await _authService.signOut();
     state = const AuthState.unauthenticated();
   }
