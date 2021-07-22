@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:chat/view/routes/router.gr.dart';
+import 'package:chat/view/routes/app_router.gr.dart';
 
 class App extends StatelessWidget {
   final _appRouter = AppRouter();

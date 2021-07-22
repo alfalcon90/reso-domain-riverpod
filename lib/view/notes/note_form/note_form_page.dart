@@ -7,7 +7,7 @@ import 'package:chat/view/notes/note_form/widgets/add_todo_tile.dart';
 import 'package:chat/view/notes/note_form/widgets/body_field.dart';
 import 'package:chat/view/notes/note_form/widgets/color_field.dart';
 import 'package:chat/view/notes/note_form/widgets/todo_list.dart';
-import 'package:chat/view/routes/router.gr.dart';
+import 'package:chat/view/routes/app_router.gr.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,7 +39,7 @@ class NoteFormPage extends StatelessWidget {
               );
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             }, (_) {
-              AutoRouter.of(context).replace(NotesOverviewRoute());
+              context.replaceRoute(NotesOverviewRoute());
             });
           });
         },

@@ -7,7 +7,7 @@ import 'package:chat/view/notes/notes_overview/widgets/overview_body.dart';
 import 'package:chat/view/notes/notes_overview/widgets/uncompleted_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:chat/view/routes/router.gr.dart';
+import 'package:chat/view/routes/app_router.gr.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NotesOverviewPage extends ConsumerWidget {
