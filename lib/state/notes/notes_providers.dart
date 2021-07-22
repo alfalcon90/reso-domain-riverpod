@@ -1,0 +1,1 @@
+// TODO: add selected note provider
