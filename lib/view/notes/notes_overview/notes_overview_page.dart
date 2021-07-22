@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:chat/controllers/auth/auth_providers.dart';
-import 'package:chat/controllers/notes/note_actor/note_actor_bloc.dart';
-import 'package:chat/controllers/notes/note_watcher/note_watcher_bloc.dart';
-import 'package:chat/injection.dart';
+import 'package:chat/state/auth/auth_providers.dart';
+import 'package:chat/state/notes/note_actor/note_actor_bloc.dart';
+import 'package:chat/state/notes/note_watcher/note_watcher_bloc.dart';
+import 'package:chat/config/injection.dart';
 import 'package:chat/view/notes/notes_overview/widgets/overview_body.dart';
 import 'package:chat/view/notes/notes_overview/widgets/uncompleted_switch.dart';
 import 'package:flutter/material.dart';

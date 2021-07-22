@@ -1,4 +1,4 @@
-import 'package:chat/controllers/notes/note_watcher/note_watcher_bloc.dart';
+import 'package:chat/state/notes/note_watcher/note_watcher_bloc.dart';
 import 'package:chat/view/notes/notes_overview/widgets/card.dart';
 import 'package:chat/view/notes/notes_overview/widgets/critical_failure.dart';
 import 'package:chat/view/notes/notes_overview/widgets/error_card.dart';

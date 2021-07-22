@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:chat/controllers/notes/note_form/note_form_bloc.dart';
+import 'package:chat/state/notes/note_form/note_form_bloc.dart';
 import 'package:chat/domain/notes/note.dart';
-import 'package:chat/injection.dart';
+import 'package:chat/config/injection.dart';
 import 'package:chat/view/notes/note_form/todo_item_view_classes.dart';
 import 'package:chat/view/notes/note_form/widgets/add_todo_tile.dart';
 import 'package:chat/view/notes/note_form/widgets/body_field.dart';

@@ -1,4 +1,4 @@
-import 'package:chat/controllers/auth/auth_state.dart';
+import 'package:chat/state/auth/auth_state.dart';
 import 'package:chat/domain/auth/auth_interface.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

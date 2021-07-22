@@ -1,4 +1,4 @@
-import 'package:chat/controllers/auth/auth_providers.dart';
+import 'package:chat/state/auth/auth_providers.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final appLaunchProvider = FutureProvider<void>((ref) async {

@@ -1,4 +1,4 @@
-import 'package:chat/controllers/core/app_launch_providers.dart';
+import 'package:chat/state/core/app_launch_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:auto_route/auto_route.dart';

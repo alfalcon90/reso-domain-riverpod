@@ -1,6 +1,6 @@
 import 'package:chat/domain/auth/auth_interface.dart';
 import 'package:chat/domain/core/errors.dart';
-import 'package:chat/injection.dart';
+import 'package:chat/config/injection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 extension FirestoreX on FirebaseFirestore {

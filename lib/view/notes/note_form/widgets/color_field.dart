@@ -1,4 +1,4 @@
-import 'package:chat/controllers/notes/note_form/note_form_bloc.dart';
+import 'package:chat/state/notes/note_form/note_form_bloc.dart';
 import 'package:chat/domain/notes/value_objects.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

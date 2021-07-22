@@ -1,4 +1,4 @@
-import 'package:chat/injection.dart';
+import 'package:chat/config/injection.dart';
 import 'package:chat/utils/logger.dart';
 import 'package:chat/view/core/app.dart';
 import 'package:firebase_core/firebase_core.dart';

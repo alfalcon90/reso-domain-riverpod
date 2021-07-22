@@ -1,6 +1,6 @@
-import 'package:chat/controllers/auth/auth_providers.dart';
-import 'package:chat/controllers/auth/sign_in_form/sign_in_form_providers.dart';
-import 'package:chat/controllers/auth/sign_in_form/sign_in_form_state.dart';
+import 'package:chat/state/auth/auth_providers.dart';
+import 'package:chat/state/auth/sign_in_form/sign_in_form_providers.dart';
+import 'package:chat/state/auth/sign_in_form/sign_in_form_state.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

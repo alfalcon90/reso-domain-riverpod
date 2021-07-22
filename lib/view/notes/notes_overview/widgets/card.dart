@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:chat/controllers/notes/note_actor/note_actor_bloc.dart';
+import 'package:chat/state/notes/note_actor/note_actor_bloc.dart';
 import 'package:chat/domain/notes/note.dart';
 import 'package:chat/domain/notes/todo_item.dart';
 import 'package:flutter/material.dart';
