@@ -5,9 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class AuthController extends StateNotifier<AuthState> {
   final IAuthService _authService;
 
-  AuthController(this._authService) : super(const AuthState.initial()) {
-    onAuthCheckRequested();
-  }
+  AuthController(this._authService) : super(const AuthState.initial());
 
   Future<void> onAuthCheckRequested() async {
     final userOption = await _authService.getSignedInUser();
