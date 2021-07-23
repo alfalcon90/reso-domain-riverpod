@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:chat/domain/core/value_objects.dart';
 import 'package:chat/domain/notes/note.dart';
 import 'package:chat/domain/notes/todo_item.dart';
@@ -15,7 +17,6 @@ class NoteDTO with _$NoteDTO {
   const NoteDTO._();
 
   const factory NoteDTO({
-    // ignore: invalid_annotation_target
     @JsonKey(ignore: true) String? id,
     required String body,
     required int color,
@@ -54,11 +55,11 @@ class NoteDTO with _$NoteDTO {
   }
 }
 
-class ServerTimeStampConverter implements JsonConverter<FieldValue, Object> {
+class ServerTimeStampConverter implements JsonConverter<FieldValue, Object?> {
   const ServerTimeStampConverter();
 
   @override
-  FieldValue fromJson(Object json) {
+  FieldValue fromJson(Object? json) {
     return FieldValue.serverTimestamp();
   }
 
