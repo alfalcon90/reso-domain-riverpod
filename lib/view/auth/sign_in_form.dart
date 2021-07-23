@@ -1,6 +1,5 @@
 import 'package:chat/state/auth/auth_providers.dart';
-import 'package:chat/state/auth/sign_in_form/sign_in_form_providers.dart';
-import 'package:chat/state/auth/sign_in_form/sign_in_form_state.dart';
+import 'package:chat/state/auth/sign_in_form_state.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -9,9 +8,9 @@ class SignInForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(signInFormControllerProvider);
+    final state = ref.watch(signInFormProvider);
 
-    ref.listen<SignInFormState>(signInFormControllerProvider, (state) {
+    ref.listen<SignInFormState>(signInFormProvider, (state) {
       state.authFailureOrSuccessOption.fold(
         () {},
         (either) => either.fold(
@@ -29,7 +28,7 @@ class SignInForm extends ConsumerWidget {
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           },
           (_) {
-            ref.read(authControllerProvider.notifier).onAuthCheckRequested();
+            ref.read(authProvider.notifier).onAuthCheckRequested();
           },
         ),
       );
@@ -54,9 +53,8 @@ class SignInForm extends ConsumerWidget {
               labelText: 'Email',
             ),
             autocorrect: false,
-            onChanged: (val) => ref
-                .read(signInFormControllerProvider.notifier)
-                .onEmailChanged(val),
+            onChanged: (val) =>
+                ref.read(signInFormProvider.notifier).onEmailChanged(val),
             validator: (_) => state.email.value.fold(
               (failure) => failure.maybeMap(
                 auth: (_) => "Invalid Email",
@@ -75,9 +73,8 @@ class SignInForm extends ConsumerWidget {
             ),
             autocorrect: false,
             obscureText: true,
-            onChanged: (val) => ref
-                .read(signInFormControllerProvider.notifier)
-                .onPasswordChanged(val),
+            onChanged: (val) =>
+                ref.read(signInFormProvider.notifier).onPasswordChanged(val),
             validator: (_) => state.password.value.fold(
               (failure) => failure.maybeMap(
                 auth: (_) => "Short Password",
@@ -93,26 +90,23 @@ class SignInForm extends ConsumerWidget {
             children: [
               Expanded(
                 child: TextButton(
-                  onPressed: () => ref
-                      .read(signInFormControllerProvider.notifier)
-                      .onSignInPressed(),
+                  onPressed: () =>
+                      ref.read(signInFormProvider.notifier).onSignInPressed(),
                   child: const Text('Sign In'),
                 ),
               ),
               Expanded(
                 child: TextButton(
-                  onPressed: () => ref
-                      .read(signInFormControllerProvider.notifier)
-                      .onRegisterPressed(),
+                  onPressed: () =>
+                      ref.read(signInFormProvider.notifier).onRegisterPressed(),
                   child: const Text('Register'),
                 ),
               )
             ],
           ),
           ElevatedButton(
-            onPressed: () => ref
-                .read(signInFormControllerProvider.notifier)
-                .onGoogleSignInPressed(),
+            onPressed: () =>
+                ref.read(signInFormProvider.notifier).onGoogleSignInPressed(),
             child: const Text('Sign in with Google'),
           ),
           if (state.isSubmitting) ...[

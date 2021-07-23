@@ -1,4 +1,4 @@
-import 'package:chat/state/auth/sign_in_form/sign_in_form_state.dart';
+import 'package:chat/state/auth/sign_in_form_state.dart';
 import 'package:chat/domain/auth/auth_failure.dart';
 import 'package:chat/domain/auth/auth_interface.dart';
 import 'package:chat/domain/auth/value_objects.dart';
@@ -6,10 +6,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SignInFormController extends StateNotifier<SignInFormState> {
+class SignInFormNotifier extends StateNotifier<SignInFormState> {
   final IAuthService _authService;
 
-  SignInFormController(
+  SignInFormNotifier(
     this._authService,
   ) : super(SignInFormState.initial());
 

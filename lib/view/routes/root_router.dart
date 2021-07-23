@@ -11,7 +11,7 @@ class RootRouter extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final launchState = ref.watch(appLaunchProvider);
-    final authState = ref.watch(authControllerProvider);
+    final authState = ref.watch(authProvider);
 
     return AutoRouter.declarative(
       routes: (_) {
