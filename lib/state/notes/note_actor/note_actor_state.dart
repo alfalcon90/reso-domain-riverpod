@@ -1,4 +1,7 @@
-part of 'note_actor_bloc.dart';
+import 'package:chat/domain/notes/note_failure.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'note_actor_state.freezed.dart';
 
 @freezed
 class NoteActorState with _$NoteActorState {

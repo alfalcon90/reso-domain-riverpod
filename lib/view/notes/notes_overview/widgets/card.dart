@@ -1,18 +1,16 @@
-import 'package:chat/state/notes/note_actor/note_actor_bloc.dart';
 import 'package:chat/domain/notes/note.dart';
 import 'package:chat/domain/notes/todo_item.dart';
 import 'package:chat/state/notes/notes_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kt_dart/kt.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NoteCard extends ConsumerWidget {
   final Note note;
 
   const NoteCard({Key? key, required this.note}) : super(key: key);
 
-  void _showDeletionDialog(BuildContext context, NoteActorBloc noteActorBloc) {
+  void _showDeletionDialog(BuildContext context, WidgetRef ref) {
     showDialog(
         context: context,
         builder: (context) {
@@ -31,7 +29,7 @@ class NoteCard extends ConsumerWidget {
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  noteActorBloc.add(NoteActorEvent.deleted(note));
+                  ref.read(noteActorProvider.notifier).deleted(note);
                 },
                 child: const Text('Delete'),
               ),
@@ -49,8 +47,7 @@ class NoteCard extends ConsumerWidget {
           ref.read(noteFormProvider.notifier).edited(note);
         },
         onLongPress: () {
-          final noteActorBloc = context.read<NoteActorBloc>();
-          _showDeletionDialog(context, noteActorBloc);
+          _showDeletionDialog(context, ref);
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
