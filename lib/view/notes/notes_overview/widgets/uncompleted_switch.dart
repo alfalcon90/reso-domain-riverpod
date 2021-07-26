@@ -1,11 +1,11 @@
-import 'package:chat/state/notes/note_watcher/note_watcher_bloc.dart';
+import 'package:chat/state/notes/notes_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class UncompletedSwitch extends HookWidget {
+class UncompletedSwitch extends HookConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final toggleState = useState(false);
 
     return Padding(
@@ -27,9 +27,9 @@ class UncompletedSwitch extends HookWidget {
         ),
         onTap: () {
           toggleState.value = !toggleState.value;
-          context.read<NoteWatcherBloc>().add(toggleState.value
-              ? NoteWatcherEvent.watchUncompletedStarted()
-              : NoteWatcherEvent.watchAllStarted());
+          toggleState.value
+              ? ref.read(noteWatcherProvider.notifier).watchUncompletedStarted()
+              : ref.read(noteWatcherProvider.notifier).watchAllStarted();
         },
       ),
     );

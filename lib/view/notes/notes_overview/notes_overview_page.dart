@@ -1,12 +1,9 @@
 import 'package:chat/state/auth/auth_providers.dart';
 import 'package:chat/state/notes/note_actor/note_actor_state.dart';
-import 'package:chat/state/notes/note_watcher/note_watcher_bloc.dart';
-import 'package:chat/config/injection.dart';
 import 'package:chat/state/notes/notes_providers.dart';
 import 'package:chat/view/notes/notes_overview/widgets/overview_body.dart';
 import 'package:chat/view/notes/notes_overview/widgets/uncompleted_switch.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class NotesOverviewPage extends ConsumerWidget {
@@ -30,31 +27,23 @@ class NotesOverviewPage extends ConsumerWidget {
           });
     });
 
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<NoteWatcherBloc>(
-          create: (context) =>
-              getIt<NoteWatcherBloc>()..add(NoteWatcherEvent.watchAllStarted()),
-        ),
-      ],
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Notes'),
-          leading: IconButton(
-              icon: Icon(Icons.exit_to_app),
-              onPressed: () {
-                ref.read(authProvider.notifier).onSignOutPressed();
-              }),
-          actions: [UncompletedSwitch()],
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            ref.read(noteFormProvider.notifier).created();
-          },
-          child: Icon(Icons.add),
-        ),
-        body: NotesOverviewBody(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Notes'),
+        leading: IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              ref.read(authProvider.notifier).onSignOutPressed();
+            }),
+        actions: [UncompletedSwitch()],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          ref.read(noteFormProvider.notifier).created();
+        },
+        child: Icon(Icons.add),
+      ),
+      body: NotesOverviewBody(),
     );
   }
 }

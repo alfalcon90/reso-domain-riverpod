@@ -1,4 +1,9 @@
-part of 'note_watcher_bloc.dart';
+import 'package:chat/domain/notes/note.dart';
+import 'package:chat/domain/notes/note_failure.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kt_dart/kt.dart';
+
+part 'note_watcher_state.freezed.dart';
 
 @freezed
 class NoteWatcherState with _$NoteWatcherState {

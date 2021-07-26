@@ -13,10 +13,9 @@ import 'package:injectable/injectable.dart' as _i2;
 import '../domain/auth/auth_interface.dart' as _i6;
 import '../domain/notes/note_interface.dart' as _i8;
 import '../services/auth/firebase_auth.dart' as _i7;
-import '../services/core/firebase_injectable_module.dart' as _i11;
-import '../services/notes/note_repository.dart' as _i9;
-import '../state/notes/note_watcher/note_watcher_bloc.dart'
-    as _i10; // ignore_for_file: unnecessary_lambdas
+import '../services/core/firebase_injectable_module.dart' as _i10;
+import '../services/notes/note_repository.dart'
+    as _i9; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -34,9 +33,7 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       get<_i3.FirebaseAuth>(), get<_i5.GoogleSignIn>()));
   gh.lazySingleton<_i8.INoteRepository>(
       () => _i9.NoteRepository(get<_i4.FirebaseFirestore>()));
-  gh.factory<_i10.NoteWatcherBloc>(
-      () => _i10.NoteWatcherBloc(get<_i8.INoteRepository>()));
   return get;
 }
 
-class _$FirebaseInjectableModule extends _i11.FirebaseInjectableModule {}
+class _$FirebaseInjectableModule extends _i10.FirebaseInjectableModule {}
