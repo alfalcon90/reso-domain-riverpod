@@ -13,12 +13,11 @@ import 'package:injectable/injectable.dart' as _i2;
 import '../domain/auth/auth_interface.dart' as _i6;
 import '../domain/notes/note_interface.dart' as _i8;
 import '../services/auth/firebase_auth.dart' as _i7;
-import '../services/core/firebase_injectable_module.dart' as _i13;
+import '../services/core/firebase_injectable_module.dart' as _i12;
 import '../services/notes/note_repository.dart' as _i9;
 import '../state/notes/note_actor/note_actor_bloc.dart' as _i10;
-import '../state/notes/note_form/note_form_bloc.dart' as _i11;
 import '../state/notes/note_watcher/note_watcher_bloc.dart'
-    as _i12; // ignore_for_file: unnecessary_lambdas
+    as _i11; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -38,11 +37,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i9.NoteRepository(get<_i4.FirebaseFirestore>()));
   gh.factory<_i10.NoteActorBloc>(
       () => _i10.NoteActorBloc(get<_i8.INoteRepository>()));
-  gh.factory<_i11.NoteFormBloc>(
-      () => _i11.NoteFormBloc(get<_i8.INoteRepository>()));
-  gh.factory<_i12.NoteWatcherBloc>(
-      () => _i12.NoteWatcherBloc(get<_i8.INoteRepository>()));
+  gh.factory<_i11.NoteWatcherBloc>(
+      () => _i11.NoteWatcherBloc(get<_i8.INoteRepository>()));
   return get;
 }
 
-class _$FirebaseInjectableModule extends _i13.FirebaseInjectableModule {}
+class _$FirebaseInjectableModule extends _i12.FirebaseInjectableModule {}

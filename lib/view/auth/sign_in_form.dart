@@ -58,9 +58,9 @@ class SignInForm extends ConsumerWidget {
             validator: (_) => state.email.value.fold(
               (failure) => failure.maybeMap(
                 auth: (_) => "Invalid Email",
-                orElse: () => null,
+                orElse: () {},
               ),
-              (_) => null,
+              (_) {},
             ),
           ),
           const SizedBox(
@@ -78,9 +78,9 @@ class SignInForm extends ConsumerWidget {
             validator: (_) => state.password.value.fold(
               (failure) => failure.maybeMap(
                 auth: (_) => "Short Password",
-                orElse: () => null,
+                orElse: () {},
               ),
-              (_) => null,
+              (_) {},
             ),
           ),
           const SizedBox(

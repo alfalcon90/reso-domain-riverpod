@@ -1,6 +1,10 @@
-part of 'note_form_bloc.dart';
+import 'package:chat/domain/notes/note.dart';
+import 'package:chat/domain/notes/note_failure.dart';
+import 'package:dartz/dartz.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-@freezed
+part 'note_form_state.freezed.dart';
+
 @freezed
 class NoteFormState with _$NoteFormState {
   const factory NoteFormState({

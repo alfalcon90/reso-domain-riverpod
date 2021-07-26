@@ -1,58 +1,48 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:chat/state/notes/note_form/note_form_bloc.dart';
-import 'package:chat/domain/notes/note.dart';
-import 'package:chat/config/injection.dart';
+import 'package:chat/state/notes/note_form/note_form_state.dart';
+import 'package:chat/state/notes/notes_providers.dart';
 import 'package:chat/view/notes/note_form/todo_item_view_classes.dart';
 import 'package:chat/view/notes/note_form/widgets/add_todo_tile.dart';
 import 'package:chat/view/notes/note_form/widgets/body_field.dart';
 import 'package:chat/view/notes/note_form/widgets/color_field.dart';
 import 'package:chat/view/notes/note_form/widgets/todo_list.dart';
-import 'package:chat/view/routes/app_router.gr.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kt_dart/kt.dart';
 
-class NoteFormPage extends StatelessWidget {
-  final Note? editedNote;
-
-  const NoteFormPage({Key? key, required this.editedNote}) : super(key: key);
+class NoteFormPage extends ConsumerWidget {
+  const NoteFormPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<NoteFormBloc>()
-        ..add(NoteFormEvent.initialized(optionOf(editedNote))),
-      child: BlocConsumer<NoteFormBloc, NoteFormState>(
-        listenWhen: (p, c) =>
-            p.saveFailureOrSuccessOption != c.saveFailureOrSuccessOption,
-        listener: (context, state) {
-          state.saveFailureOrSuccessOption.fold(() {}, (either) {
-            either.fold((f) {
-              final snackBar = SnackBar(
-                content: Text(
-                  f.map(
-                      unexpected: (_) => 'Unexpected error occured',
-                      insufficientPermission: (_) => 'Insufficient permissions',
-                      unableToUpdate: (_) => 'Couldn\'t update the note'),
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            }, (_) {
-              context.replaceRoute(NotesOverviewRoute());
-            });
-          });
-        },
-        buildWhen: (p, c) => p.isSaving != c.isSaving,
-        builder: (context, state) => Stack(
-          children: [
-            const NoteFormPageScaffold(),
-            Overlay(
-              isSaving: state.isSaving,
-            )
-          ],
-        ),
-      ),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.read(noteFormProvider);
+
+    ref.listen<NoteFormState>(noteFormProvider, (state) {
+      state.saveFailureOrSuccessOption.fold(() {}, (either) {
+        either.fold((f) {
+          final snackBar = SnackBar(
+            content: Text(
+              f.map(
+                unexpected: (_) => 'Unexpected error occured',
+                insufficientPermission: (_) => 'Insufficient permissions',
+                unableToUpdate: (_) => 'Couldn\'t update the note',
+              ),
+            ),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }, (_) {
+          ref.read(openedNoteProvider).state = none();
+        });
+      });
+    });
+
+    return Stack(
+      children: [
+        NoteFormPageScaffold(state),
+        Overlay(
+          isSaving: state.isSaving,
+        )
+      ],
     );
   }
 }
@@ -95,49 +85,55 @@ class Overlay extends StatelessWidget {
   }
 }
 
-class NoteFormPageScaffold extends StatelessWidget {
-  const NoteFormPageScaffold({
+class NoteFormPageScaffold extends ConsumerWidget {
+  final NoteFormState state;
+
+  const NoteFormPageScaffold(
+    this.state, {
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: BlocBuilder<NoteFormBloc, NoteFormState>(
-          buildWhen: (p, c) => p.isEditing != c.isEditing,
-          builder: (context, state) {
-            return Text(state.isEditing ? 'Edit a note' : 'Create a note');
+        title: Text(state.isEditing ? 'Edit a note' : 'Create a note'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            ref.read(openedNoteProvider).state = none();
           },
         ),
         actions: [
           IconButton(
             onPressed: () {
-              context.read<NoteFormBloc>().add(const NoteFormEvent.saved());
+              ref.read(noteFormProvider.notifier).saved();
             },
             icon: Icon(Icons.check),
           )
         ],
       ),
-      body: BlocBuilder<NoteFormBloc, NoteFormState>(
-          buildWhen: (p, c) => p.showErrorMessages != c.showErrorMessages,
-          builder: (context, state) {
-            return ChangeNotifierProvider(
-              create: (_) => FormTodos(),
-              child: Form(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const BodyField(),
-                      const ColorField(),
-                      const TodoList(),
-                      const AddTodoTile()
-                    ],
-                  ),
-                ),
-              ),
-            );
-          }),
+      body: Form(
+        child: SingleChildScrollView(
+          child: ProviderScope(
+            overrides: [
+              formTodosProvider.overrideWithValue(StateController(
+                  state.note.todos.value.fold(
+                      (_) => emptyList<TodoItemPrimitive>(),
+                      (todoItemList) => todoItemList
+                          .map((todo) => TodoItemPrimitive.fromDomain(todo))))),
+            ],
+            child: Column(
+              children: [
+                const BodyField(),
+                const ColorField(),
+                const TodoList(),
+                const AddTodoTile(),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,13 +1,13 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:chat/state/notes/note_actor/note_actor_bloc.dart';
 import 'package:chat/domain/notes/note.dart';
 import 'package:chat/domain/notes/todo_item.dart';
+import 'package:chat/state/notes/notes_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:chat/view/routes/app_router.gr.dart';
 
-class NoteCard extends StatelessWidget {
+class NoteCard extends ConsumerWidget {
   final Note note;
 
   const NoteCard({Key? key, required this.note}) : super(key: key);
@@ -41,12 +41,12 @@ class NoteCard extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       color: note.color.getOrCrash(),
       child: InkWell(
         onTap: () {
-          context.pushRoute(NoteFormRoute(editedNote: note));
+          ref.read(noteFormProvider.notifier).edited(note);
         },
         onLongPress: () {
           final noteActorBloc = context.read<NoteActorBloc>();

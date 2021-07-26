@@ -1,9 +1,7 @@
 import 'package:chat/domain/core/value_objects.dart';
 import 'package:chat/domain/notes/todo_item.dart';
 import 'package:chat/domain/notes/value_objects.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kt_dart/kt.dart';
 
 part 'todo_item_view_classes.freezed.dart';
 
@@ -35,8 +33,4 @@ class TodoItemPrimitive with _$TodoItemPrimitive {
       done: done,
     );
   }
-}
-
-class FormTodos extends ValueNotifier<KtList<TodoItemPrimitive>> {
-  FormTodos() : super(emptyList<TodoItemPrimitive>());
 }
